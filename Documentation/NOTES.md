@@ -13,3 +13,5 @@ To get the count, I traversed through the keys at multiple levels
 After started working on the stats endpoint, mid-way, I realized that I have to change the json structure to capture required details.
 
 Hitting stats endpoint started to throw error, whenever I restarted the application. To handle empty stats, I would return a default response.
+
+Stats function is updated to calculate the lengthiest input received

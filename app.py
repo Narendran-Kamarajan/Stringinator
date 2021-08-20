@@ -41,6 +41,7 @@ def stringinate():
         chars = "".join(re.split("[^a-zA-Z]*", input))
         charsSet = set(chars) #Unique characters
         maxCount = 0
+
         for char in charsSet: #Iterate for each charcter
             if chars.count(char) > maxCount:
                 maxCount = chars.count(char)
@@ -75,16 +76,30 @@ def stringinate():
 @app.route('/stats')
 def string_stats():
     mostCount = 0
-    for strData in seen_strings["data"]:
+    maxLength = 0
+    mostString = []
+    lengthyString = []
+    for strData in seen_strings["data"]: #Loop through all inputs
+        #Longest string
+        if len(strData) > maxLength :
+            maxLength = len(strData)
+            lengthyString = [strData]
+        elif len(strData) == maxLength :
+            lengthyString.append(strData)
+        #Repeated string
         if seen_strings["data"][strData]["Check count"] > mostCount :
             mostCount = seen_strings["data"][strData]["Check count"]
             mostString = [strData]
         elif seen_strings["data"][strData]["Check count"] == mostCount :
             mostString.append(strData)
 
-    if seen_strings:
+    if mostString: #Update only if not empty
         seen_strings["report"]["most_popular"] = mostString
         seen_strings["report"]["most_popular_count"] = mostCount
+
+    if lengthyString: #Update only if not empty
+        seen_strings["report"]["longest_input_received"] = lengthyString
+        seen_strings["report"]["longest_input_received_length"] = maxLength
 
     return {
         "inputs": seen_strings
