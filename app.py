@@ -4,7 +4,7 @@ import re
 
 app = Flask(__name__)
 
-seen_strings = {}
+seen_strings = {"data":{},"report":{}}
 
 @app.route('/')
 def root():
@@ -31,11 +31,11 @@ def stringinate():
             "input":""
             }
     else:
-        if input in seen_strings:
-            seen_strings[input]["Check count"] += 1
+        if input in seen_strings["data"]:
+            seen_strings["data"][input]["Check count"] += 1
         else:
-            seen_strings[input] = {}
-            seen_strings[input]["Check count"] = 1
+            seen_strings["data"][input] = {}
+            seen_strings["data"][input]["Check count"] = 1
 
         #Get all the alphanumeric characters
         chars = "".join(re.split("[^a-zA-Z]*", input))
@@ -44,16 +44,26 @@ def stringinate():
         for char in charsSet: #Iterate for each charcter
             if chars.count(char) > maxCount:
                 maxCount = chars.count(char)
-                maxChar = []
-                maxChar.append(char)
+                maxChar = [char]
             elif chars.count(char) == maxCount: #Append to list if the count is same
                 maxChar.append(char)
 
         if maxCount != 0 :
-            seen_strings[input]["Most repeated"] = {
+            seen_strings["data"][input]["Most repeated"] = {
                 "Character": maxChar,
                 "Count": maxCount
                 }
+        else: #If there is only special characters in the input
+            seen_strings["data"][input]["Most repeated"] = {
+                "Character": "Null",
+                "Count": 0
+                }
+            return {
+                "input": input,
+                "length": len(input),
+                "Most repeated character": "No alphanumeric character available",
+                "Repeat count": "NA"
+            }
 
         return {
             "input": input,
@@ -64,6 +74,18 @@ def stringinate():
 
 @app.route('/stats')
 def string_stats():
+    mostCount = 0
+    for strData in seen_strings["data"]:
+        if seen_strings["data"][strData]["Check count"] > mostCount :
+            mostCount = seen_strings["data"][strData]["Check count"]
+            mostString = [strData]
+        elif seen_strings["data"][strData]["Check count"] == mostCount :
+            mostString.append(strData)
+
+    if seen_strings:
+        seen_strings["report"]["most_popular"] = mostString
+        seen_strings["report"]["most_popular_count"] = mostCount
+
     return {
-        "inputs": seen_strings,
+        "inputs": seen_strings
     }

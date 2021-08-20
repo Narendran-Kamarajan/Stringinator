@@ -1,4 +1,9 @@
-I want to extract only the Alpha-Numeric characters avoiding all the special characters and whitespaces.
-re module would be used to extract the characters, I got the function from https://www.journaldev.com/46322/extract-characters-alphanumeric-python-string
+#Stringinator
+https://www.journaldev.com/46322/extract-characters-alphanumeric-python-string
+Ignore special characters and extract only alpha numeric characters
 
-I have update the function to check the count of each alphanumberic character and populate the list of most repeated charcters.
+https://www.programiz.com/python-programming/nested-dictionary
+Loop through dictionary having dictionaries as values
+
+https://www.tutorialspoint.com/python-check-if-dictionary-is-empty
+Handling empty report, if no data is processed already

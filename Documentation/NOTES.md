@@ -4,20 +4,12 @@ The application supports a small set of API endpoints that can be used to get in
 
 I have chosen Python for this project, as I have already worked with Flask module.
 
-## Documentation
+I want to extract only the Alpha-Numeric characters avoiding all the special characters and whitespaces. re module would be used to extract the characters.
 
-###/
-The root of the server displays info about the other endpoints. This is the only endpoint that does not return JSON.
+I have updated the function to check the count of each alphanumberic character and populate the list of most repeated charcters.
 
-###/stringinate
-Get all the info you've ever wanted about a string. Accepts GET and POST requests. For POSTs the endpoint takes JSON of the following form:
-    {"input":"your-string-goes-here"}
+To get the count, I traversed through the keys at multiple levels
 
-For GETs an input string is specified as ?input=<your-input>.
+After started working on the stats endpoint, mid-way, I realized that I have to change the json structure to capture required details.
 
-###/stats
-Get statistics about all strings the server has seen, including the number of times each input has been received along with the longest and most popular strings etc.
-
-
-##Improvements
-For the /stringinate endpoint, for a given input string we need to find the character that occurs most frequently and add that character, along with its number of occurrences to the API response JSON. You decide how to represent this in the JSON response. Ignore white space and punctuation.
+Hitting stats endpoint started to throw error, whenever I restarted the application. To handle empty stats, I would return a default response.
