@@ -17,3 +17,5 @@ Hitting stats endpoint started to throw error, whenever I restarted the applicat
 Stats function is updated to calculate the lengthiest input received
 
 As I have implemented and validated the required features, I want to enable secure protocol with SSL certificate
+
+To improve application stability, I have included the exception handling. This will ensure not to crash the App with incorrect inputs.

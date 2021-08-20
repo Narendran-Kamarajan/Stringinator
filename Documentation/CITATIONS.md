@@ -14,3 +14,6 @@ Check the availability of the variable
 https://www.softwaretestinghelp.com/flask-design-patterns-for-web-applications/
 https://prettyprinted.com/tutorials/automatically_load_environment_variables_in_flask
 To enable secure protocal connection
+
+https://instructobit.com/tutorial/112/Python-Flask:-error-and-exception-handling
+Exception handling 

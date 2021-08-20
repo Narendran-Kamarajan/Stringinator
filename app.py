@@ -27,9 +27,9 @@ def stringinate():
         input = request.args.get('input', '')
 
     if input == "" :
-        return {
-            "input":""
-            }
+        raise ValueError("No input provided")
+    elif type(input) != str:
+        raise TypeError("Stringinator accepts only string")
     else:
         if input in seen_strings["data"]:
             seen_strings["data"][input]["Check count"] += 1
@@ -104,3 +104,7 @@ def string_stats():
     return {
         "inputs": seen_strings
     }
+
+@app.errorhandler(Exception)
+def basic_error(errArg):
+    return {"Error": str(errArg)}
