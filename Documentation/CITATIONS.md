@@ -10,3 +10,7 @@ Handling empty report, if no data is processed already
 
 https://careerkarma.com/blog/python-local-variable-referenced-before-assignment/
 Check the availability of the variable
+
+https://www.softwaretestinghelp.com/flask-design-patterns-for-web-applications/
+https://prettyprinted.com/tutorials/automatically_load_environment_variables_in_flask
+To enable secure protocal connection

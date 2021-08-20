@@ -15,3 +15,5 @@ After started working on the stats endpoint, mid-way, I realized that I have to 
 Hitting stats endpoint started to throw error, whenever I restarted the application. To handle empty stats, I would return a default response.
 
 Stats function is updated to calculate the lengthiest input received
+
+As I have implemented and validated the required features, I want to enable secure protocol with SSL certificate
