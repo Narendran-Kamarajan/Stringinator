@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+import re
 
 app = Flask(__name__)
 
@@ -25,15 +26,41 @@ def stringinate():
     else:
         input = request.args.get('input', '')
 
-    if input in seen_strings:
-        seen_strings[input] += 1
+    if input == "" :
+        return {
+            "input":""
+            }
     else:
-        seen_strings[input] = 1
+        if input in seen_strings:
+            seen_strings[input]["Check count"] += 1
+        else:
+            seen_strings[input] = {}
+            seen_strings[input]["Check count"] = 1
 
-    return {
-        "input": input,
-        "length": len(input),
-    }
+        #Get all the alphanumeric characters
+        chars = "".join(re.split("[^a-zA-Z]*", input))
+        charsSet = set(chars) #Unique characters
+        maxCount = 0
+        for char in charsSet: #Iterate for each charcter
+            if chars.count(char) > maxCount:
+                maxCount = chars.count(char)
+                maxChar = []
+                maxChar.append(char)
+            elif chars.count(char) == maxCount: #Append to list if the count is same
+                maxChar.append(char)
+
+        if maxCount != 0 :
+            seen_strings[input]["Most repeated"] = {
+                "Character": maxChar,
+                "Count": maxCount
+                }
+
+        return {
+            "input": input,
+            "length": len(input),
+            "Most repeated charcter": maxChar,
+            "Repeat count": maxCount
+        }
 
 @app.route('/stats')
 def string_stats():
