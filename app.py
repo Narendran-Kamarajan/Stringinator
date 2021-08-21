@@ -1,11 +1,14 @@
 from flask import Flask
 from flask import request
 from os.path import exists as file_exists
+from flask_caching import Cache
+
 import re
 import pickle
 
 
 app = Flask(__name__)
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 #Fetch data on Application startup
 if file_exists("Backup/seen_strings.pickle"):
@@ -23,6 +26,7 @@ def pickleData(store_strings):
         pickle.dump(store_strings,outFile)
 
 @app.route('/', methods=['GET'])
+@cache.cached(timeout=0) #No timeout for static page 
 def root():
     '''
     This root function serve as a home page as well as a brief guidance
@@ -100,6 +104,7 @@ def stringinate():
         }
 
 @app.route('/stats')
+@cache.cached(timeout=10) #Reduced timeout
 def string_stats():
     mostCount = 0
     maxLength = 0

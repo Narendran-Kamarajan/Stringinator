@@ -21,3 +21,5 @@ As I have implemented and validated the required features, I want to enable secu
 To improve application stability, I have included the exception handling. This will ensure not to crash the App with incorrect inputs.
 
 I am using the pickle to store and retrieve the dictionary. So that even if the App goes down, data would be available on restart.
+
+Introduced different caching timeout from each endpoints

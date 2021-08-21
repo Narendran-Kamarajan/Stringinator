@@ -23,3 +23,8 @@ To validate the availbility of backup file
 
 https://www.datacamp.com/community/tutorials/pickle-python-tutorial#whatfor
 Store and retrieve the dictionary
+
+https://pypi.org/project/Flask-Caching/
+https://flask-caching.readthedocs.io/en/latest/index.html
+https://stackoverflow.com/questions/17938711/how-can-i-configure-flask-cache-with-infinite-timeout
+Set cache for the endpoints
