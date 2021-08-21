@@ -14,8 +14,10 @@ cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 if file_exists("Backup/seen_strings.pickle"):
     with open("Backup/seen_strings.pickle", "rb") as pickledFile :
         seen_strings=pickle.load(pickledFile)
+
+    print(" * Loaded from Backup/seen_strings.pickle file")
 else: #Initiate a dummy record if backup not found
-    print("Backup/seen_strings.pickle file is not available")
+    print(" * Backup/seen_strings.pickle file is not available")
     seen_strings = {"data":{},"report":{}}
 
 def pickleData(store_strings):
@@ -26,7 +28,7 @@ def pickleData(store_strings):
         pickle.dump(store_strings,outFile)
 
 @app.route('/', methods=['GET'])
-@cache.cached(timeout=0) #No timeout for static page 
+@cache.cached(timeout=0) #No timeout for static page
 def root():
     '''
     This root function serve as a home page as well as a brief guidance
@@ -70,7 +72,7 @@ def stringinate():
         charsSet = set(chars) #Unique characters
         maxCount = 0
 
-        for char in charsSet: #Iterate for each unique  charcter
+        for char in charsSet: #Iterate for each unique  character
             if chars.count(char) > maxCount:
                 maxCount = chars.count(char)
                 maxChar = [char]
@@ -99,7 +101,7 @@ def stringinate():
         return {
             "input": input,
             "length": len(input),
-            "Most repeated charcter": maxChar,
+            "Most repeated character": maxChar,
             "Repeat count": maxCount
         }
 

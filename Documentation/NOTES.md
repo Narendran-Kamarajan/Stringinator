@@ -23,3 +23,5 @@ To improve application stability, I have included the exception handling. This w
 I am using the pickle to store and retrieve the dictionary. So that even if the App goes down, data would be available on restart.
 
 Introduced different caching timeout from each endpoints
+
+I have written different test cases for each endpoints.
