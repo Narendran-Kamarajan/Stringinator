@@ -16,4 +16,10 @@ https://prettyprinted.com/tutorials/automatically_load_environment_variables_in_
 To enable secure protocal connection
 
 https://instructobit.com/tutorial/112/Python-Flask:-error-and-exception-handling
-Exception handling 
+Exception handling
+
+https://www.pythontutorial.net/python-basics/python-check-if-file-exists/
+To validate the availbility of backup file
+
+https://www.datacamp.com/community/tutorials/pickle-python-tutorial#whatfor
+Store and retrieve the dictionary

@@ -7,19 +7,26 @@ import pickle
 
 app = Flask(__name__)
 
+#Fetch data on Application startup
 if file_exists("Backup/seen_strings.pickle"):
     with open("Backup/seen_strings.pickle", "rb") as pickledFile :
         seen_strings=pickle.load(pickledFile)
-else:
+else: #Initiate a dummy record if backup not found
     print("Backup/seen_strings.pickle file is not available")
     seen_strings = {"data":{},"report":{}}
 
 def pickleData(store_strings):
+    '''
+    This function get the current data available and store in server as a backup. Data is preserved on App restart
+    '''
     with open("Backup/seen_strings.pickle", "wb") as outFile :
         pickle.dump(store_strings,outFile)
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def root():
+    '''
+    This root function serve as a home page as well as a brief guidance
+    '''
     return '''
     <pre>
     Welcome to the Stringinator 3000 for all of your string manipulation needs.
@@ -32,20 +39,25 @@ def root():
 
 @app.route('/stringinate', methods=['GET','POST'])
 def stringinate():
+    '''
+    stringinate function process the provided string and populated the mosted repeated character.
+    Also it returns the  string that was provided as an input for most number of times.
+    Another additional feature of this function is to show he longest string that has ever been provided as the input.
+    '''
     input = ''
     if request.method == 'POST':
         input = request.json['input']
     else:
         input = request.args.get('input', '')
-
+    #validate the input once before processing
     if input == "" :
         raise ValueError("No input provided")
     elif type(input) != str:
         raise TypeError("Stringinator accepts only string")
     else:
-        if input in seen_strings["data"]:
+        if input in seen_strings["data"]: #String checked already
             seen_strings["data"][input]["Check count"] += 1
-        else:
+        else: #First time entry
             seen_strings["data"][input] = {}
             seen_strings["data"][input]["Check count"] = 1
 
@@ -54,7 +66,7 @@ def stringinate():
         charsSet = set(chars) #Unique characters
         maxCount = 0
 
-        for char in charsSet: #Iterate for each charcter
+        for char in charsSet: #Iterate for each unique  charcter
             if chars.count(char) > maxCount:
                 maxCount = chars.count(char)
                 maxChar = [char]
@@ -71,7 +83,7 @@ def stringinate():
                 "Character": "Null",
                 "Count": 0
                 }
-            pickleData(seen_strings)
+            pickleData(seen_strings) #Store current data
             return {
                 "input": input,
                 "length": len(input),
@@ -79,7 +91,7 @@ def stringinate():
                 "Repeat count": "NA"
             }
 
-        pickleData(seen_strings)
+        pickleData(seen_strings) #Store current data
         return {
             "input": input,
             "length": len(input),
@@ -115,7 +127,7 @@ def string_stats():
         seen_strings["report"]["longest_input_received"] = lengthyString
         seen_strings["report"]["longest_input_received_length"] = maxLength
 
-    pickleData(seen_strings)
+    pickleData(seen_strings) #Store current data
     return {
         "inputs": seen_strings
     }
