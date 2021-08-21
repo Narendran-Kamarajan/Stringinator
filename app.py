@@ -1,10 +1,22 @@
 from flask import Flask
 from flask import request
+from os.path import exists as file_exists
 import re
+import pickle
+
 
 app = Flask(__name__)
 
-seen_strings = {"data":{},"report":{}}
+if file_exists("Backup/seen_strings.pickle"):
+    with open("Backup/seen_strings.pickle", "rb") as pickledFile :
+        seen_strings=pickle.load(pickledFile)
+else:
+    print("Backup/seen_strings.pickle file is not available")
+    seen_strings = {"data":{},"report":{}}
+
+def pickleData(store_strings):
+    with open("Backup/seen_strings.pickle", "wb") as outFile :
+        pickle.dump(store_strings,outFile)
 
 @app.route('/')
 def root():
@@ -59,6 +71,7 @@ def stringinate():
                 "Character": "Null",
                 "Count": 0
                 }
+            pickleData(seen_strings)
             return {
                 "input": input,
                 "length": len(input),
@@ -66,6 +79,7 @@ def stringinate():
                 "Repeat count": "NA"
             }
 
+        pickleData(seen_strings)
         return {
             "input": input,
             "length": len(input),
@@ -101,6 +115,7 @@ def string_stats():
         seen_strings["report"]["longest_input_received"] = lengthyString
         seen_strings["report"]["longest_input_received_length"] = maxLength
 
+    pickleData(seen_strings)
     return {
         "inputs": seen_strings
     }
