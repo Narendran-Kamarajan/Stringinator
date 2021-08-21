@@ -137,6 +137,6 @@ def string_stats():
         "inputs": seen_strings
     }
 
-@app.errorhandler(Exception)
+@app.errorhandler(Exception) #All errors
 def basic_error(errArg):
     return {"Error": str(errArg)}

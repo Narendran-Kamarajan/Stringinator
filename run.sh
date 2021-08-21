@@ -7,4 +7,4 @@ export FLASK_DEBUG=True
 export FLASK_RUN_CERT=./Certificates/mycert.pem
 export FLASK_RUN_KEY=./Certificates/mykey.pem
 
-flask run
+nohup flask run >> Logs/nohup.out 2>&1 &
