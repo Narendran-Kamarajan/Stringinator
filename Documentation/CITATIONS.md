@@ -48,3 +48,7 @@ Compare lists for equality
 
 https://python-forum.io/thread-22792.html
 Assert dictionary keys
+
+https://stackoverflow.com/questions/14328406/tool-to-convert-python-code-to-be-pep8-compliant#14328499
+https://pypi.org/project/autopep8/
+Code beautify
