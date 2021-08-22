@@ -32,6 +32,7 @@ if [[ $runCheck -eq 0 ]]
 then
     echo "INFO::Stringinator App is started"
     grep "Running on" ./Logs/nohup.out | awk -F'(' '{print $1}'
+    pytest ./test.py >> ./Logs/nohup.out
 else
     echo "ERROR::Unable to start Stringinator App"
     exit 1
