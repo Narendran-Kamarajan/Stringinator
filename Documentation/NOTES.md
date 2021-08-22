@@ -25,3 +25,5 @@ I am using the pickle to store and retrieve the dictionary. So that even if the 
 Introduced different caching timeout from each endpoints
 
 I have written different test cases for each endpoints.
+
+As the application is finalized, install script has been integrated with the run script. 

@@ -52,3 +52,6 @@ Assert dictionary keys
 https://stackoverflow.com/questions/14328406/tool-to-convert-python-code-to-be-pep8-compliant#14328499
 https://pypi.org/project/autopep8/
 Code beautify
+
+https://unix.stackexchange.com/questions/452048/get-python-process-id-for-a-flask-web-site-and-or-port-number
+Validate App availbility
