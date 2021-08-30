@@ -12,8 +12,7 @@ For GETs an input string is specified as ?input=<your-input>.
 ## /stats
 Get statistics about all strings the server has seen, including the number of times each input has been received along with the longest and most popular strings etc.
 
-##Instructions
+## Instructions
 Execute the run.sh script to start the Application.
-
 Test results would be added to the startup logs.
 
